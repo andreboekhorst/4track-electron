@@ -1,0 +1,21 @@
+appId: cc.4track.desktop
+productName: 4Track
+directories:
+  buildResources: build
+  output: dist
+files:
+  - out/**
+  - package.json
+mac:
+  category: public.app-category.music
+  target: dmg
+  hardenedRuntime: true
+  entitlements: build/entitlements.mac.plist
+  entitlementsInherit: build/entitlements.mac.plist
+  extendInfo:
+    NSMicrophoneUsageDescription: 4Track needs the microphone to record onto your cassette.
+fileAssociations:
+  - ext: 4trk
+    name: 4Track Cassette
+    description: 4Track Cassette
+    role: Editor

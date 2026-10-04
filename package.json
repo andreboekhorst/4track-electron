@@ -1,0 +1,30 @@
+{
+  "name": "4track-electron",
+  "productName": "4Track",
+  "version": "0.1.0",
+  "description": "4Track cassette recorder as a stand-alone desktop app",
+  "main": "./out/main/index.js",
+  "private": true,
+  "scripts": {
+    "dev": "electron-vite dev",
+    "build": "electron-vite build",
+    "preview": "electron-vite preview",
+    "check": "svelte-check --workspace src --tsconfig ../tsconfig.json",
+    "dist": "electron-vite build && electron-builder --mac",
+    "dist:local": "electron-vite build && electron-builder --mac --dir -c.mac.identity=-"
+  },
+  "dependencies": {
+    "4track": "^0.2.1"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^6.2.4",
+    "@tsconfig/svelte": "^5.0.8",
+    "electron": "^44.5.1",
+    "electron-builder": "^26.15.3",
+    "electron-vite": "^5.0.0",
+    "svelte": "^5.57.1",
+    "svelte-check": "^4.7.6",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.1"
+  }
+}
