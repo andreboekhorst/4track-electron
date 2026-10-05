@@ -3,6 +3,7 @@
   "productName": "4Track",
   "version": "0.1.0",
   "description": "4Track cassette recorder as a stand-alone desktop app",
+  "author": "Andre Boekhorst",
   "main": "./out/main/index.js",
   "private": true,
   "scripts": {
@@ -10,8 +11,8 @@
     "build": "electron-vite build",
     "preview": "electron-vite preview",
     "check": "svelte-check --workspace src --tsconfig ../tsconfig.json",
-    "dist": "electron-vite build && electron-builder --mac",
-    "dist:local": "electron-vite build && electron-builder --mac --dir -c.mac.identity=-"
+    "dist:local": "electron-vite build && electron-builder --mac --dir -c.mac.identity=- -c.mac.entitlements=build/entitlements.local.plist -c.mac.entitlementsInherit=build/entitlements.local.plist",
+    "release": "electron-vite build && node --env-file=.env node_modules/electron-builder/cli.js --mac"
   },
   "dependencies": {
     "4track": "^0.2.1"

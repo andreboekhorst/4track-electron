@@ -8,12 +8,19 @@ files:
   - package.json
 mac:
   category: public.app-category.music
-  target: dmg
+  # Apple Silicon only: skips the Intel build and the universal merge step.
+  target:
+    - target: dmg
+      arch: arm64
   hardenedRuntime: true
+  # Notarization runs in build/notarize.cjs instead (the built-in step fails
+  # for app names starting with a digit).
+  notarize: false
   entitlements: build/entitlements.mac.plist
   entitlementsInherit: build/entitlements.mac.plist
   extendInfo:
     NSMicrophoneUsageDescription: 4Track needs the microphone to record onto your cassette.
+afterSign: build/notarize.cjs
 fileAssociations:
   - ext: 4trk
     name: 4Track Cassette

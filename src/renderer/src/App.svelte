@@ -135,6 +135,10 @@
 </script>
 
 <main>
+  <!-- Blank strip of casing above the top row of controls: holds the traffic
+       lights and is where the window is dragged. -->
+  <div class="drag-strip"></div>
+
   <div class="fourtrack-wrapper">
     {#key session.id}
       <FourTrack
@@ -163,49 +167,55 @@
     user-select: none;
   }
 
+  /* The window is transparent: only the recorder itself is visible. */
   :global(html, body) {
     margin: 0;
     height: 100%;
     overflow: hidden;
+    background: transparent;
   }
 
   :global(body) {
     font-family: system-ui, sans-serif;
-    background: radial-gradient(ellipse at top left, #f4f3ef, #ebeae6);
+  }
 
-    &::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background: radial-gradient(ellipse at center, transparent 60%, rgba(0, 0, 0, 0.2) 100%);
-      pointer-events: none;
-      z-index: 101;
+  /* The window is sized to the recorder (see WINDOW_RATIO in main), so it
+     spans the full width; cqw inside the recorder equals vw here. The top
+     padding leaves room for the lip the recorder draws above its body. */
+  .fourtrack-wrapper {
+    width: 100vw;
+    padding-top: 0.5vw;
+
+    /* The recorder's CSS drop shadow would be clipped by the window edge;
+       the native window shadow replaces it. */
+    & :global(.frame) {
+      box-shadow: none;
     }
   }
 
-  main {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 24px;
+  .drag-strip {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3.5vw;
+    z-index: 10;
+    -webkit-app-region: drag;
   }
 
-  /* The recorder is 1 : 0.6; fit it inside the window with room for the status line. */
-  .fourtrack-wrapper {
-    width: min(100%, calc((100vh - 48px - 32px) / 0.6));
-  }
-
+  /* Printed on the casing, below the transport buttons. */
   .status {
-    height: 32px;
-    padding-top: 12px;
-    font-size: 13px;
-    opacity: 0.65;
-    text-align: center;
+    position: fixed;
+    right: 5vw;
+    bottom: 0.9vw;
+    font-size: max(10px, 0.9vw);
+    color: rgba(255, 255, 255, 0.55);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    pointer-events: none;
 
     .error {
-      color: rgb(120, 20, 20);
+      color: rgb(255, 120, 110);
     }
   }
 </style>

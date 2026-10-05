@@ -7,6 +7,10 @@ import type { CassetteFile, Command, ConfirmResult, DocumentState, WriteRequest 
 const EXTENSION = "4trk"
 const FILE_FILTERS = [{ name: "4Track Cassette", extensions: [EXTENSION] }]
 
+// The window is just the recorder: its body is 1 : 0.6, plus the lip on top
+// that sticks out by 0.5% of the width (see App.svelte).
+const WINDOW_RATIO = 0.6 + 0.005
+
 let win: BrowserWindow | null = null
 let rendererReady: Promise<void> = Promise.resolve()
 let doc: DocumentState = { path: null, dirty: false }
@@ -18,17 +22,29 @@ const pendingOpenPaths: string[] = []
 function createWindow(): BrowserWindow {
   const w = new BrowserWindow({
     width: 1200,
-    height: 800,
-    minWidth: 640,
-    minHeight: 440,
+    height: Math.round(1200 * WINDOW_RATIO),
+    minWidth: 800,
     title: "4Track",
-    backgroundColor: "#efeeea",
-    titleBarStyle: "default",
+    // Transparent and without a title bar, so only the device itself shows;
+    // its rounded corners and lip sit directly on the desktop. The traffic
+    // lights go on the casing, in the strip above the top row of controls.
+    transparent: true,
+    backgroundColor: "#00000000",
+    hasShadow: true,
+    titleBarStyle: "hidden",
+    trafficLightPosition: { x: 20, y: 16 },
+    show: false,
     webPreferences: {
       preload: join(__dirname, "../preload/index.js"),
       sandbox: false,
     },
   })
+  w.setAspectRatio(1 / WINDOW_RATIO)
+  w.once("ready-to-show", () => w.show())
+  // macOS derives the shadow of a transparent window from its content's shape;
+  // recompute it once the recorder is drawn and whenever its size changes.
+  w.webContents.on("did-finish-load", () => setTimeout(() => w.invalidateShadow(), 300))
+  w.on("resize", () => w.invalidateShadow())
 
   rendererReady = new Promise((resolve) => {
     ipcMain.once("renderer:ready", (event) => {
