@@ -1,5 +1,7 @@
 appId: cc.4track.desktop
-productName: 4Track
+productName: 4Track Tape Recorder
+# No spaces in the download's file name.
+artifactName: 4Track-Tape-Recorder-${version}-${arch}.${ext}
 directories:
   buildResources: build
   output: dist
@@ -19,7 +21,7 @@ mac:
   entitlements: build/entitlements.mac.plist
   entitlementsInherit: build/entitlements.mac.plist
   extendInfo:
-    NSMicrophoneUsageDescription: 4Track needs the microphone to record onto your cassette.
+    NSMicrophoneUsageDescription: 4Track Tape Recorder needs the microphone to record onto your cassette.
 afterSign: build/notarize.cjs
 fileAssociations:
   - ext: 4trk

@@ -24,7 +24,7 @@ function createWindow(): BrowserWindow {
     width: 1200,
     height: Math.round(1200 * WINDOW_RATIO),
     minWidth: 800,
-    title: "4Track",
+    title: app.name,
     // Transparent and without a title bar, so only the device itself shows;
     // its rounded corners and lip sit directly on the desktop. The traffic
     // lights go on the casing, in the strip above the top row of controls.
@@ -241,10 +241,10 @@ async function explainMicrophoneDenied() {
   micDialogOpen = true
   const { response } = await dialog.showMessageBox(win, {
     type: "warning",
-    message: "4Track can't use the microphone",
+    message: `${app.name} can't use the microphone`,
     detail: app.isPackaged
-      ? "Microphone access is turned off for 4Track. Turn it on in System Settings → Privacy & Security → Microphone, then try recording again."
-      : "Microphone access is turned off. In development, macOS checks the app you launched 4Track from (e.g. Terminal or Visual Studio Code). Turn it on for that app in System Settings → Privacy & Security → Microphone, then restart it.",
+      ? `Microphone access is turned off for ${app.name}. Turn it on in System Settings → Privacy & Security → Microphone, then try recording again.`
+      : "Microphone access is turned off. In development, macOS checks the app you launched it from (e.g. Terminal or Visual Studio Code). Turn it on for that app in System Settings → Privacy & Security → Microphone, then restart it.",
     buttons: ["Open System Settings", "Cancel"],
     defaultId: 0,
     cancelId: 1,

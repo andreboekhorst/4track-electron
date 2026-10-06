@@ -2,8 +2,8 @@
 // notarytool and staples the ticket, before the .dmg is built from it.
 //
 // Replaces electron-builder's built-in notarization (mac.notarize: false):
-// that one runs `codesign <basename>` and codesign parses "4Track.app" as
-// process ID 4 ("No such process"), so any app name starting with a digit fails.
+// that one runs `codesign <basename>` and codesign parses a name like "4Track.app"
+// as process ID 4 ("No such process"), so any app name starting with a digit fails.
 
 const { execFileSync } = require("node:child_process")
 const fs = require("node:fs")
