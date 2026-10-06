@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "description": "4Track Tape Recorder: the 4track cassette recorder as a stand-alone desktop app",
   "author": "Andre Boekhorst",
+  "license": "GPL-3.0-only",
   "main": "./out/main/index.js",
   "private": true,
   "scripts": {
