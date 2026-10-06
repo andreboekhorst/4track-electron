@@ -23,6 +23,13 @@ mac:
   extendInfo:
     NSMicrophoneUsageDescription: 4Track Tape Recorder needs the microphone to record onto your cassette.
 afterSign: build/notarize.cjs
+# `npm run release -- --publish always` uploads to a draft GitHub release
+# (needs GH_TOKEN in the environment).
+publish:
+  provider: github
+  owner: andreboekhorst
+  repo: 4track-electron
+  releaseType: draft
 fileAssociations:
   - ext: 4trk
     name: 4Track Cassette
