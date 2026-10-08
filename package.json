@@ -1,8 +1,8 @@
 {
   "name": "4track-electron",
-  "productName": "4Track Tape Recorder",
-  "version": "0.1.0",
-  "description": "4Track Tape Recorder: the 4track cassette recorder as a stand-alone desktop app",
+  "productName": "4Track Recorder",
+  "version": "0.1.1",
+  "description": "4Track Recorder: the 4track cassette recorder as a stand-alone desktop app",
   "author": "Andre Boekhorst",
   "license": "GPL-3.0-only",
   "main": "./out/main/index.js",

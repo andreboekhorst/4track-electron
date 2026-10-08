@@ -1,7 +1,7 @@
 appId: cc.4track.desktop
-productName: 4Track Tape Recorder
+productName: 4Track Recorder
 # No spaces in the download's file name.
-artifactName: 4Track-Tape-Recorder-${version}-${arch}.${ext}
+artifactName: 4Track-Recorder-${version}-${arch}.${ext}
 directories:
   buildResources: build
   output: dist
@@ -10,6 +10,8 @@ files:
   - package.json
 mac:
   category: public.app-category.music
+  # Icon Composer file; electron-builder compiles it with actool (needs Xcode 26+).
+  icon: assets/4TrackRecorder.icon
   # Apple Silicon only: skips the Intel build and the universal merge step.
   target:
     - target: dmg
@@ -21,7 +23,7 @@ mac:
   entitlements: build/entitlements.mac.plist
   entitlementsInherit: build/entitlements.mac.plist
   extendInfo:
-    NSMicrophoneUsageDescription: 4Track Tape Recorder needs the microphone to record onto your cassette.
+    NSMicrophoneUsageDescription: 4Track Recorder needs the microphone to record onto your cassette.
 afterSign: build/notarize.cjs
 # `npm run release -- --publish always` uploads to a draft GitHub release
 # (needs GH_TOKEN in the environment).
